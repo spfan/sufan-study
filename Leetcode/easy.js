@@ -10,9 +10,9 @@ var isAnagram = function(s, t) {
     if(sLen != undefined && tLen != undefined && sLen === tLen){
         var indexs = [];
         for(var i=0;i < sLen;i++) indexs.push(i);
-        for(var i=0;i < sLen;i++){
+        for(var n=0;n < sLen;n++){
             for(var j = 0,len = indexs.length;j < len;j ++){
-                if(s[i] === t[indexs[j]]){
+                if(s[n] === t[indexs[j]]){
                     indexs.splice(j,1);
                     break;
                 }
