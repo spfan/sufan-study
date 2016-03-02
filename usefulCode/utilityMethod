@@ -1,0 +1,18 @@
+/**
+ *  获取字符串长度（区分半角、全角）
+ **/
+function getStringLength(str) {
+  var totalLength = 0;
+  var list = str.split("");
+  for(var i = 0; i < list.length; i++) {
+   var s = list[i];
+   if (s.match(/[\u0000-\u00ff]/g)) { //半角
+    totalLength += 1; 
+   } else if (s.match(/[\u4e00-\u9fa5]/g)) { //中文
+    totalLength += 2; 
+   } else if (s.match(/[\uff00-\uffff]/g)) { //全角
+    totalLength +=2;
+   }
+  }   
+  return totalLength;
+}
