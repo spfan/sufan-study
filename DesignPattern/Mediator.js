@@ -6,6 +6,7 @@ function guidGenerator() {
     return (S4()+S4()+"-"+S4()+"-"+S4()+"-"+S4()+"-"+S4()+S4()+S4());
 }
 
+
 function Subscriber(fn, options, context) {
 	
 	if(!this instanceof Subscriber){
