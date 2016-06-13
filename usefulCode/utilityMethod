@@ -16,3 +16,15 @@ function getStringLength(str) {
   }   
   return totalLength;
 }
+
+    function binaryToSring(number, map, split){
+        var arr = number.toString(2).split('');
+        var split = split || '、';
+        while( arr.length < keys(maps).length ) arr.unshift('0');
+        arr = arr.map(function(e, i, a){
+            return map[ e * Math.pow(2, a.length - i - 1) ];
+        }).filter(function(e, i){
+            return e;
+        });
+        return arr.join(split);
+    }
