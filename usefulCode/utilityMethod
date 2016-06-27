@@ -17,14 +17,41 @@ function getStringLength(str) {
   return totalLength;
 }
 
-    function binaryToSring(number, map, split){
-        var arr = number.toString(2).split('');
-        var split = split || '、';
-        while( arr.length < keys(maps).length ) arr.unshift('0');
-        arr = arr.map(function(e, i, a){
-            return map[ e * Math.pow(2, a.length - i - 1) ];
-        }).filter(function(e, i){
-            return e;
-        });
-        return arr.join(split);
-    }
+function binaryToSring(number, map, split){
+    var arr = number.toString(2).split('');
+    var split = split || '、';
+    while( arr.length < keys(maps).length ) arr.unshift('0');
+    arr = arr.map(function(e, i, a){
+        return map[ e * Math.pow(2, a.length - i - 1) ];
+    }).filter(function(e, i){
+        return e;
+    });
+    return arr.join(split);
+}
+
+/**
+*  jquery插件一般写法
+*/
+(function ($) {
+	var Plugin = {};
+	Plugin.prototype = {};
+
+	$.fn.extend({
+		pluginName: function(option) {
+			var args = [].slice.call(arguments, 1);
+			return this.each(function() {
+				var ui = $._data(this, pluginName);
+				if(!ui){
+					var options = $.extend(true, {}, $.fn.pluginName.defaults, typeof options === 'object' ? option : {});
+					ui = new Plugin(options);
+					$._data(this. pluginName, ui);
+				}
+				if( typeof option === 'string' && typeof ui[option] === 'function' ){
+					ui[option].apply(this, args);
+				}
+			});
+			$.fn.pluginName.defaults = {};
+		}
+	});
+
+})(jQuery)
