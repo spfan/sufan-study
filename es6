@@ -62,3 +62,49 @@ const el = dom.div({},
 );
 
 document.body.appendChild(el);
+
+
+
+/* 模板引擎 */
+
+function compile(template, data){
+  var evalExpr = /<%=(.+?)%>/g;
+  var expr = /<%([\s\S]+?)%>/g;
+  var html = '';
+
+  template = template
+    .replace(evalExpr, '`); \n  echo( $1 ); \n  echo(`')
+    .replace(expr, '`); \n $1 \n  echo(`');
+
+  template = 'echo(`' + template + '`);';
+
+  var script =
+  ` var output = "";
+
+    function echo(html){
+      output += html;
+    }
+
+    ${ template }
+
+    return output;
+  `;
+  html = new Function('data', script);
+
+  return html(data);
+
+}
+
+var a = compile( 
+`
+	<ul>
+	  <% for(var i=0; i < data.supplies.length; i++) { %>
+	    <li><%= data.supplies[i] %></li>
+	  <% } %>
+	</ul>
+`,{supplies: [3, 4, 5]});
+
+console.log(a)
+
+
+
